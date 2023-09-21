@@ -2,10 +2,8 @@ import React, { useRef, useState } from "react";
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
   TouchableOpacity,
-  Modal,
   ToastAndroid,
   StatusBar,
 } from "react-native";
@@ -21,7 +19,7 @@ const RegMobile = () => {
   const phoneInput = useRef<PhoneInput>(null);
 
   return (
-    <Container variant="solid">
+    <Container variant="solid" >
       <StatusBar backgroundColor="#8bbe1b" />
       <TextStyle variant="black">Please enter your mobile number</TextStyle>
       <View style={{ marginVertical: "10%" }}>

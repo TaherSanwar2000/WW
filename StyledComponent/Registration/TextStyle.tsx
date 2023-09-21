@@ -8,7 +8,8 @@ const TextStyle = styled(Text,{
     variants:{
         variant:{
             white:{
-                color:'$primary0'
+                color:'$primary0',
+                marginTop:'50%'
             },
             black:{
                 color:'$primary1'

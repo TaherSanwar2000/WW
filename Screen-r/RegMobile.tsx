@@ -1,16 +1,16 @@
-import React, { useRef, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useRef, useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ToastAndroid,
-  StatusBar,
+    StatusBar,
+    StyleSheet,
+    Text,
+    ToastAndroid,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
-import { useNavigation } from "@react-navigation/native";
-import Container from "../StyledComponent/Registration/Container";
-import TextStyle from "../StyledComponent/Registration/TextStyle";
+import Container from "../StyledComponent-r/Registration/Container";
+import TextStyle from "../StyledComponent-r/Registration/TextStyle";
 
 const RegMobile = () => {
   const navigation = useNavigation();

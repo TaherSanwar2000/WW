@@ -1,22 +1,19 @@
-import {
-  Text,
-  StatusBar,
-  TextInput,
-  Button,
-  View,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Alert,
-  StyleSheet,
-  ToastAndroid,
-} from "react-native";
-import React, { useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useState } from "react";
+import {
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    ToastAndroid,
+    TouchableOpacity,
+    View
+} from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import Container from "../StyledComponent/Registration/Container";
-import TextBoxStyle from "../StyledComponent/Registration/TextBoxStyle";
-import TextStyle from "../StyledComponent/Registration/TextStyle";
+import Container from "../StyledComponent-r/Registration/Container";
+import TextBoxStyle from "../StyledComponent-r/Registration/TextBoxStyle";
+import TextStyle from "../StyledComponent-r/Registration/TextStyle";
 
 const Registration = () => {
   const navigation = useNavigation();

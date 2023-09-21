@@ -1,7 +1,7 @@
 import { StyledProvider,  } from "@gluestack-style/react";
 import { config } from "./gluestack-style.config";
 import {NavigationContainer} from '@react-navigation/native';
-import StackNavigation from './Navigation/StackNavigation'
+import StackNavigation from './Navigation-r/StackNavigation'
 
 
 export default function App() {

@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import Registration from "../Screen/Registration";
-import RegMobile from "../Screen/RegMobile";
-import AddressInfo from "../Screen/Address/AddressInfo";
+import Registration from "../Screen-r/Registration";
+import RegMobile from "../Screen-r/RegMobile";
+import AddressInfo from "../Screen-r/Address/AddressInfo";
 
 const Stack = createStackNavigator();
 

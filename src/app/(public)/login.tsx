@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
 import { useNavigation } from "@react-navigation/native";
-import Container from "../../StyledComponent/Registration/Container";
-import TextStyle from "../../StyledComponent/Registration/TextStyle";
+import Container from "../../../StyledComponent/Registration/Container";
+import TextStyle from "../../../StyledComponent/Registration/TextStyle";
 
 const Login = () => {
   const navigation = useNavigation();

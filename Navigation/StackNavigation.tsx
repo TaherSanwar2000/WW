@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import Registration from "../Screen/Registration";
-import AddressInfo from "../Screen/Address/AddressInfo";
-import Login from "../Screen/public/login";
-import ChangeAddress from "../Screen/Address/ChangeAddress";
+import Registration from "../src/app/(public)/Registration";
+import Login from "../src/app/(public)/login";
+import AddressInfo from "../src/app/(public)/Map/Index";
+import ChangeAddress from "../src/app/(public)/ChangeAddress";
 
 const Stack = createStackNavigator();
 

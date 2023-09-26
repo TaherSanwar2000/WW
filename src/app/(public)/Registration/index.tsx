@@ -12,9 +12,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import Container from "../../StyledComponent/Registration/Container";
-import TextBoxStyle from "../../StyledComponent/Registration/TextBoxStyle";
-import TextStyle from "../../StyledComponent/Registration/TextStyle";
+
+import Container from "../../../components/ui/Container";
+import TextStyle from "../../../components/ui/TextStyle";
+import TextBoxStyle from "../../../components/ui/TextBoxStyle";
 
 const Registration = () => {
   const navigation = useNavigation();

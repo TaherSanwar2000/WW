@@ -9,15 +9,12 @@ const Container = styled(View,{
     
     variants:{
         variant:{
-            solid:{
+            bgWhite:{
                 bg:'$primary0'
             },
-            subtle:{
+            bgGreen:{
                 bg:'#8bbe1b'
             },
-            flex1:{
-                flex:1
-            }
         }
 
     }

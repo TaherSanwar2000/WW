@@ -9,7 +9,7 @@ const TextBoxStyle = styled(View, {
   alignItems: "center",
   paddingHorizontal: 10,
   paddingVertical: 12,
-  marginVertical: "4%",
+  marginVertical: "2%",
 });
 
 export default TextBoxStyle;

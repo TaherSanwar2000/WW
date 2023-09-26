@@ -1,7 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import Registration from "../Screen/Registration";
-import RegMobile from "../Screen/RegMobile";
 import AddressInfo from "../Screen/Address/AddressInfo";
+import Login from "../Screen/public/login";
+import ChangeAddress from "../Screen/Address/ChangeAddress";
 
 const Stack = createStackNavigator();
 
@@ -10,7 +11,7 @@ function MyStack() {
     <Stack.Navigator>
       <Stack.Screen
         name="RegMobile"
-        component={RegMobile}
+        component={Login}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -26,6 +27,11 @@ function MyStack() {
           headerTitleAlign: "center", // Center-align the header title
           headerTintColor:'#8bbe1b'
         }}
+      />
+      <Stack.Screen
+        name="ChangeAddress"
+        component={ChangeAddress}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

@@ -9,17 +9,17 @@ import {
 } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
 import { useNavigation } from "@react-navigation/native";
-import Container from "../StyledComponent/Registration/Container";
-import TextStyle from "../StyledComponent/Registration/TextStyle";
+import Container from "../../StyledComponent/Registration/Container";
+import TextStyle from "../../StyledComponent/Registration/TextStyle";
 
-const RegMobile = () => {
+const Login = () => {
   const navigation = useNavigation();
 
   const [value, setValue] = useState("");
   const phoneInput = useRef<PhoneInput>(null);
 
   return (
-    <Container variant="solid" >
+    <Container variant="bgWhite" >
       <StatusBar backgroundColor="#8bbe1b" />
       <TextStyle variant="black">Please enter your mobile number</TextStyle>
       <View style={{ marginVertical: "10%" }}>
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegMobile;
+export default Login;

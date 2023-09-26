@@ -128,7 +128,7 @@ const Registration = () => {
               validateEmail(text);
             }}
             onBlur={() => validateEmail(email)}
-            placeholder="Email"
+            placeholder="email"
           />
         </TextBoxStyle>
 

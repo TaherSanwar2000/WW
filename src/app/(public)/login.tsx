@@ -6,21 +6,28 @@ import {
   TouchableOpacity,
   ToastAndroid,
   StatusBar,
+  Pressable,
 } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
-import { useNavigation } from "@react-navigation/native";
-import Container from "../../../StyledComponent/Registration/Container";
-import TextStyle from "../../../StyledComponent/Registration/TextStyle";
+import Container from "../../components/ui/Container";
+import TextStyle from "../../components/ui/TextStyle";
+import { Link, router } from "expo-router";
 
 const Login = () => {
-  const navigation = useNavigation();
-
   const [value, setValue] = useState("");
   const phoneInput = useRef<PhoneInput>(null);
+  const checkValid = phoneInput.current?.isValidNumber(value);
+
+  const CheckPhoneNum = () => {
+    if (checkValid) {
+      router.push({ pathname: '/Registration', params: { phone: value } });
+    } else {
+      ToastAndroid.show("Enter valid number", ToastAndroid.SHORT);
+    }
+  };
 
   return (
-    <Container variant="bgWhite" >
-      <StatusBar backgroundColor="#8bbe1b" />
+    <Container variant="bgWhite">
       <TextStyle variant="black">Please enter your mobile number</TextStyle>
       <View style={{ marginVertical: "10%" }}>
         <PhoneInput
@@ -44,19 +51,9 @@ const Login = () => {
         />
       </View>
 
-      <TouchableOpacity
-        style={styles.ContinueButton}
-        onPress={() => {
-          const checkValid = phoneInput.current?.isValidNumber(value);
-          {
-            checkValid
-              ? navigation.navigate("Registration", { phone: value })
-              : ToastAndroid.show("Enter valid number", ToastAndroid.SHORT);
-          }
-        }}
-      >
+      <Pressable onPress={CheckPhoneNum} style={styles.ContinueButton}>
         <Text style={styles.textContinue}>Continue</Text>
-      </TouchableOpacity>
+      </Pressable>
     </Container>
   );
 };

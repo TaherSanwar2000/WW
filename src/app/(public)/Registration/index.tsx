@@ -9,19 +9,20 @@ import {
   ToastAndroid,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import Container from "../../../components/ui/Container";
 import TextStyle from "../../../components/ui/TextStyle";
 import TextBoxStyle from "../../../components/ui/TextBoxStyle";
+import { StyledProvider } from "@gluestack-style/react";
+import { config } from "../../../../gluestack-style.config";
+import { router, useRouter, useSearchParams } from "expo-router";
 
 const Registration = () => {
-  const navigation = useNavigation();
-
-  const route = useRoute();
-  const { phone } = route.params;
+  const route = useRouter();
+  const param = useSearchParams();
+  console.log(param.phone);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -75,7 +76,7 @@ const Registration = () => {
     // Check if there are any validation errors
     if (!nameError && !emailError) {
       if (name !== "" && email !== "") {
-        navigation.navigate("AddressInfo");
+        router.push("/Map/Index");
       } else {
         ToastAndroid.show("Please enter details", ToastAndroid.SHORT);
       }
@@ -87,78 +88,81 @@ const Registration = () => {
   };
 
   return (
-    <Container variant="bgGreen">
-      <StatusBar backgroundColor="transparent" translucent={true} />
-
-      <View
-        style={{
-          width: "90%",
-          alignItems: "center",
-          bottom: isKeyboardOpen ? 90 : null,
-        }}
-      >
-        <TextStyle variant="white">Please enter your mobile number</TextStyle>
-
-        <TextBoxStyle>
-          <FontAwesomeIcon name="phone" size={30} color="#8bbe1b" />
-          <Text style={{ marginLeft: "5%" }}>{phone}</Text>
-        </TextBoxStyle>
-
-        <TextBoxStyle>
-          <FontAwesomeIcon name="user" size={30} color="#8bbe1b" />
-          <TextInput
-            style={{ marginLeft: "5%", color: "#000000" }}
-            value={name}
-            onChangeText={(text) => {
-              setName(text);
-              validateName(text);
-            }}
-            onBlur={() => validateName(name)}
-            placeholder="Name"
-          />
-        </TextBoxStyle>
-        {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
-
-        <TextBoxStyle>
-          <MaterialCommunityIcon name="email" size={30} color="#8bbe1b" />
-          <TextInput
-            style={{ marginLeft: "5%", color: "#000000" }}
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-              validateEmail(text);
-            }}
-            onBlur={() => validateEmail(email)}
-            placeholder="email"
-          />
-        </TextBoxStyle>
-
-        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-      </View>
-
-      <View
-        style={{
-          justifyContent: isKeyboardOpen === false ? "flex-end" : null,
-          flex: 1,
-          height: 100,
-          width: "100%",
-          bottom: isKeyboardOpen ? 70 : null,
-        }}
-      >
-        <TouchableOpacity
+    <StyledProvider config={config}>
+      <Container variant="bgGreen">
+        <StatusBar backgroundColor="transparent" translucent={true} />
+        <View
           style={{
-            backgroundColor: "#ffa500",
-            padding: 15,
-            height: isKeyboardOpen ? 50 : null,
+            width: "90%",
+            alignItems: "center",
+            bottom: isKeyboardOpen ? 90 : null,
           }}
-          onPress={handleSubmit}
         >
-          <Text style={{ textAlign: "center", fontSize: 18, color: "#FFF" }}>
-            Submit
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </Container>
+          <TextStyle variant="white">Please enter your mobile number</TextStyle>
+
+          <TextBoxStyle>
+            <FontAwesomeIcon name="phone" size={30} color="#8bbe1b" />
+            <Text style={{ marginLeft: "5%" }}>{param.phone}</Text>
+          </TextBoxStyle>
+
+          <TextBoxStyle>
+            <FontAwesomeIcon name="user" size={30} color="#8bbe1b" />
+            <TextInput
+              style={{ marginLeft: "5%", color: "#000000" }}
+              value={name}
+              onChangeText={(text) => {
+                setName(text);
+                validateName(text);
+              }}
+              onBlur={() => validateName(name)}
+              placeholder="Name"
+            />
+          </TextBoxStyle>
+          {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
+
+          <TextBoxStyle>
+            <MaterialCommunityIcon name="email" size={30} color="#8bbe1b" />
+            <TextInput
+              style={{ marginLeft: "5%", color: "#000000" }}
+              value={email}
+              onChangeText={(text) => {
+                setEmail(text);
+                validateEmail(text);
+              }}
+              onBlur={() => validateEmail(email)}
+              placeholder="email"
+            />
+          </TextBoxStyle>
+
+          {emailError ? (
+            <Text style={styles.errorText}>{emailError}</Text>
+          ) : null}
+        </View>
+
+        <View
+          style={{
+            justifyContent: isKeyboardOpen === false ? "flex-end" : null,
+            flex: 1,
+            height: 100,
+            width: "100%",
+            bottom: isKeyboardOpen ? 70 : null,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#ffa500",
+              padding: 15,
+              height: isKeyboardOpen ? 50 : null,
+            }}
+            onPress={handleSubmit}
+          >
+            <Text style={{ textAlign: "center", fontSize: 18, color: "#FFF" }}>
+              Submit
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Container>
+    </StyledProvider>
   );
 };
 

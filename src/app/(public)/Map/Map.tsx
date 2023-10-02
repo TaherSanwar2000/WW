@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Dimensions,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-} from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import * as Location from "expo-location";
 import { Entypo } from "@expo/vector-icons";
 import MapView, { Marker, Circle, Callout } from "react-native-maps";
-import { useNavigation } from "@react-navigation/native";
+import Container from "../../../components/ui/Container";
+import { router } from "expo-router";
+import TextStyle from "../../../components/ui/TextStyle";
+import { StyledProvider } from "@gluestack-style/react";
+import { config } from "../../../../gluestack-style.config";
+import TouchableStyle from "../../../components/ui/TouchableStyle";
+import TextInputStyle from "../../../components/ui/TextInputStyle";
 
 const Maps = () => {
-  const navigation = useNavigation();
-
   const [displayCurrentAddress, setDisplayCurrentAddress] = useState("");
   const [houseNum, setHouseNum] = useState("");
   const [street, setStreet] = useState("");
@@ -72,135 +69,85 @@ const Maps = () => {
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: "white",
-      }}
-    >
-      <MapView
-        style={{
-          height: "50%",
-          width: Dimensions.get("window").width,
-        }}
-        region={mapRegion}
-        onRegionChangeComplete={handleRegionChangeComplete}
-      >
-        {/* Add a Marker component for the current location */}
-        {currentLocation && (
-          <>
-            <Marker
-              coordinate={currentLocation}
-              title="Your Location"
-              pinColor="red"
-            >
-              <Callout>
-                <Text>I'm here</Text>
-              </Callout>
-            </Marker>
-            <Circle
-              center={currentLocation}
-              radius={10} // Radius in meters, adjust as needed
-              fillColor="#fffdfa" // Fill color of the circle
-              strokeColor="#ffa500" // Stroke color of the circle
-            />
-          </>
-        )}
-      </MapView>
-
-      <View
-        style={{
-          flexDirection: "row",
-          width: Dimensions.get("window").width,
-          marginVertical: 20,
-          justifyContent: "space-evenly",
-          alignItems: "center",
-        }}
-      >
-        <Entypo
-          name="location-pin"
-          size={30}
-          color="red"
-          style={{ marginLeft: 5 }}
-        />
-        <View>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "400",
-              flexWrap: "wrap", // Allow text to wrap to multiple lines
-              maxWidth: Dimensions.get("window").width - 120, // Adjust max width as needed
-            }}
-            numberOfLines={2} // Limit to 2 lines
-          >
-            {displayCurrentAddress}
-          </Text>
-        </View>
-        <TouchableOpacity
-          style={{ backgroundColor: "#ffa500", borderRadius: 5 }}
-          onPress={() => navigation.navigate("ChangeAddress")}
+    <StyledProvider config={config}>
+      <Container variant="mapContainer">
+        <MapView
+          style={{
+            height: "50%",
+            width: Dimensions.get("window").width,
+          }}
+          region={mapRegion}
+          onRegionChangeComplete={handleRegionChangeComplete}
         >
-          <Text
-            style={{
-              fontSize: 15,
-              color: "#FFF",
-              padding: 10,
-              fontWeight: "bold",
-            }}
-          >
-            Change
-          </Text>
-        </TouchableOpacity>
-      </View>
+          {/* Add a Marker component for the current location */}
+          {currentLocation && (
+            <>
+              <Marker
+                coordinate={currentLocation}
+                title="Your Location"
+                pinColor="red"
+              >
+                <Callout>
+                  <Text>I'm here</Text>
+                </Callout>
+              </Marker>
+              <Circle
+                center={currentLocation}
+                radius={10} // Radius in meters, adjust as needed
+                fillColor="#fffdfa" // Fill color of the circle
+                strokeColor="#ffa500" // Stroke color of the circle
+              />
+            </>
+          )}
+        </MapView>
 
-      <View style={styles.InputBox}>
-        <TextInput
-          style={styles.textBoxStyle}
-          value={houseNum}
-          onChangeText={(text) => setHouseNum(text)}
-          placeholder="House/Block/Flat/Building"
-        />
-      </View>
-      <View style={styles.InputBox}>
-        <TextInput
-          style={styles.textBoxStyle}
-          value={street}
-          onChangeText={(text) => setHouseNum(text)}
-          placeholder="Street,Society or Landmark"
-        />
-      </View>
-      <View
-        style={{
-          justifyContent: "flex-end",
-          flex: 1,
-          height: 100,
-          width: "100%",
-        }}
-      >
-        <TouchableOpacity style={{ backgroundColor: "#ffa500", padding: 10 }}>
-          <Text style={{ textAlign: "center", fontSize: 18, color: "#FFF" }}>
-            Confirm
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+        <Container variant="AddressInfo">
+          <Entypo
+            name="location-pin"
+            size={30}
+            color="red"
+            style={{ marginLeft: 5 }}
+          />
+          <View>
+            <TextStyle
+              variant="AddressText"
+              numberOfLines={2} // Limit to 2 lines
+            >
+              {displayCurrentAddress}
+            </TextStyle>
+          </View>
+          <TouchableStyle
+            variant="ChangeButton"
+            onPress={() => router.push("../ChangeAddress")}
+          >
+            <TextStyle variant="ChangeAddressButtonText">Change</TextStyle>
+          </TouchableStyle>
+        </Container>
+
+        <Container variant="SaveAddress">
+          <TextInputStyle
+            variant="userAddressInput"
+            value={houseNum}
+            onChangeText={(text) => setHouseNum(text)}
+            placeholder="House/Block/Flat/Building"
+          />
+        </Container>
+        <Container variant="SaveAddress">
+          <TextInputStyle
+            variant="userAddressInput"
+            value={street}
+            onChangeText={(text) => setStreet(text)}
+            placeholder="Street,Society or Landmark"
+          />
+        </Container>
+        <Container variant="ConfirmButton">
+          <TouchableStyle variant="ConfirmButton">
+            <TextStyle variant="ConfirmText">Confirm</TextStyle>
+          </TouchableStyle>
+        </Container>
+      </Container>
+    </StyledProvider>
   );
 };
 
 export default Maps;
-const styles = StyleSheet.create({
-  textBoxStyle: {
-    fontSize: 16,
-    color: "#000000",
-    padding: 8,
-    marginLeft: 5,
-  },
-  InputBox: {
-    width: "90%",
-    borderWidth: 1,
-    borderColor: "#dcdcdc",
-    borderRadius: 5,
-    marginTop: "5%",
-  },
-});

@@ -1,17 +1,10 @@
 import React, { useRef, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ToastAndroid,
-  StatusBar,
-  Pressable,
-} from "react-native";
+import { View, ToastAndroid } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
 import Container from "../../components/ui/Container";
 import TextStyle from "../../components/ui/TextStyle";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
+import TouchableStyle from "../../components/ui/TouchableStyle";
 
 const Login = () => {
   const [value, setValue] = useState("");
@@ -20,7 +13,7 @@ const Login = () => {
 
   const CheckPhoneNum = () => {
     if (checkValid) {
-      router.push({ pathname: '/Registration', params: { phone: value } });
+      router.push({ pathname: "/Registration", params: { phone: value } });
     } else {
       ToastAndroid.show("Enter valid number", ToastAndroid.SHORT);
     }
@@ -51,27 +44,11 @@ const Login = () => {
         />
       </View>
 
-      <Pressable onPress={CheckPhoneNum} style={styles.ContinueButton}>
-        <Text style={styles.textContinue}>Continue</Text>
-      </Pressable>
+      <TouchableStyle onPress={CheckPhoneNum}>
+        <TextStyle>Continue</TextStyle>
+      </TouchableStyle>
     </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  textContinue: {
-    padding: 10,
-    fontSize: 15,
-    paddingVertical: 18,
-    fontWeight: "bold",
-    color: "#FFF",
-    textAlign: "center",
-  },
-  ContinueButton: {
-    width: "30%",
-    backgroundColor: "#ffa500",
-    borderRadius: 3,
-  },
-});
 
 export default Login;

@@ -1,9 +1,6 @@
 import {
   Text,
   StatusBar,
-  TextInput,
-  View,
-  TouchableOpacity,
   Keyboard,
   StyleSheet,
   ToastAndroid,
@@ -18,6 +15,8 @@ import TextBoxStyle from "../../../components/ui/TextBoxStyle";
 import { StyledProvider } from "@gluestack-style/react";
 import { config } from "../../../../gluestack-style.config";
 import { router, useRouter, useSearchParams } from "expo-router";
+import TextInputStyle from "../../../components/ui/TextInputStyle";
+import TouchableStyle from "../../../components/ui/TouchableStyle";
 
 const Registration = () => {
   const route = useRouter();
@@ -91,12 +90,9 @@ const Registration = () => {
     <StyledProvider config={config}>
       <Container variant="bgGreen">
         <StatusBar backgroundColor="transparent" translucent={true} />
-        <View
-          style={{
-            width: "90%",
-            alignItems: "center",
-            bottom: isKeyboardOpen ? 90 : null,
-          }}
+        <Container
+          variant="TextBoxContainer"
+          states={{ checked: isKeyboardOpen }}
         >
           <TextStyle variant="white">Please enter your mobile number</TextStyle>
 
@@ -107,8 +103,8 @@ const Registration = () => {
 
           <TextBoxStyle>
             <FontAwesomeIcon name="user" size={30} color="#8bbe1b" />
-            <TextInput
-              style={{ marginLeft: "5%", color: "#000000" }}
+            <TextInputStyle
+              variant="userInput"
               value={name}
               onChangeText={(text) => {
                 setName(text);
@@ -122,8 +118,8 @@ const Registration = () => {
 
           <TextBoxStyle>
             <MaterialCommunityIcon name="email" size={30} color="#8bbe1b" />
-            <TextInput
-              style={{ marginLeft: "5%", color: "#000000" }}
+            <TextInputStyle
+              variant="userInput"
               value={email}
               onChangeText={(text) => {
                 setEmail(text);
@@ -137,30 +133,17 @@ const Registration = () => {
           {emailError ? (
             <Text style={styles.errorText}>{emailError}</Text>
           ) : null}
-        </View>
+        </Container>
 
-        <View
-          style={{
-            justifyContent: isKeyboardOpen === false ? "flex-end" : null,
-            flex: 1,
-            height: 100,
-            width: "100%",
-            bottom: isKeyboardOpen ? 70 : null,
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#ffa500",
-              padding: 15,
-              height: isKeyboardOpen ? 50 : null,
-            }}
+        <Container variant="ButtonContainer" states={{ hover: isKeyboardOpen }}>
+          <TouchableStyle
+            variant="submitButton"
+            states={{ checked: isKeyboardOpen }}
             onPress={handleSubmit}
           >
-            <Text style={{ textAlign: "center", fontSize: 18, color: "#FFF" }}>
-              Submit
-            </Text>
-          </TouchableOpacity>
-        </View>
+            <TextStyle variant="textSubmit">Submit</TextStyle>
+          </TouchableStyle>
+        </Container>
       </Container>
     </StyledProvider>
   );

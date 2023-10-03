@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-const GooglePlacesInput = () => {
+const ChangeAddress = () => {
   return (
     <View style={styles.container}>
       <GooglePlacesAutocomplete
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GooglePlacesInput;
+export default ChangeAddress;
